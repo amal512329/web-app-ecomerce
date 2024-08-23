@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>skip and login</title>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Login</h1>
+        <!-- Your login form with username, email, and password fields -->
+        <form method="post" action="{% url 'custom-login' %}">
+            {% csrf_token %}
+            <label for="username">Username:</label>
+            <input type="text" name="username" required>
+            <br>
+            <label for="email">Email:</label>
+            <input type="email" name="email" required>
+            <br>
+            <label for="password">Password:</label>
+            <input type="password" name="password" required>
+            <br>
+            <button type="submit">Login</button>
+        </form>
+    
+        {% if serializer %}
+            <div class="token-info">
+                <p>Access Token: {{ serializer.access_token }}</p>
+                <p>Refresh Token: {{ serializer.refresh_token }}</p>
+                <p>User ID: {{ serializer.user_id }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
